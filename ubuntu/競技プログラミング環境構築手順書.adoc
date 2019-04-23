@@ -1,0 +1,222 @@
+= 競技プログラミング環境構築手順書
+
+== 1. g++のインストール
+
+aptコマンドでg++をインストールします。 +
+
+....
+$ sudp apt install g++
+....
+
+
+== 2. VSCodeのインストール
+
+https://code.visualstudio.com/Download[VSCodeの公式サイト]にアクセスし、.deb の 64bit をクリックしてdebファイルをダウンロードします。 +
+ダウンロードしたdebファイルに対してaptコマンドを実行します。 +
+
+....
+$ sudo apt install ./[ファイル名].deb
+....
+
+
+== 3. atcoder-toolsのインストール
+
+atcoder-toolsをインストールするために、python3とpipのインストールを行います。 +
+
+....
+$ sudo apt install python3 python3-pip
+....
+
+atcoder-toolsをインストールします。 +
+
+....
+$ sudo pip3 install atcoder-tools
+....
+
+
+== 4. コード管理用のディレクトリを作成
+
+`~/works/CompetitiveProgramming` ディレクトリを作成し、コードを管理するディレクトリにします。 +
+
+....
+$ mkdir -p ~/works/CompetitiveProgramming
+....
+
+各種サイト用のディレクトリを作成します。 +
+
+....
+$ mkdir ~/works/CompetitiveProgramming/AtCoder
+....
+
+
+== 5. エイリアスの登録
+
+引数付きのコマンドを楽に実行できるように、エイリアスの登録を行います。 +
+
+....
+$ vi ~/.bashrc
+
+下記の1行をファイル末尾に追加
+alias g++14="g++ -std=c++14 -O2 -Wno-unused-result"
+....
+
+
+== 6. テンプレートファイルを作成
+
+自分好みのテンプレートファイルを作成します。 `~/works/CompetitiveProgramming/template` ディレクトリを作成し、`atcoder.template` ファイルとして保存します。 +
+
+....
+$ mkdir ~/works/CompetitiveProgramming/template
+$ vi ~/works/CompetitiveProgramming/template/atcoder.template
+....
+
+参考例のテンプレートファイルを下記に記載します。 +
+詳しくは、 https://github.com/kyuridenamida/atcoder-tools[atcoder-toolsのGitHub] を確認してください。 +
+
+....
+#include <bits/stdc++.h>
+using namespace std;
+
+#define MP make_pair
+#define PB push_back
+#define ALL(x)      (x).begin(),(x).end()
+#define REP(i,n)    for(int i=0;i<(n);i++)
+#define REP1(i,n)   for(int i=1;i<(n);i++)
+#define REP2(i,d,n) for(int i=(d);i<(n);i++)
+#define RREP(i,n)   for(int i=(n);i>=0;i--)
+#define CLR(a)      memset((a),0,sizeof(a))
+#define MCLR(a)     memset((a),-1,sizeof(a))
+#define RANGE(x,y,maxX,maxY) (0 <= (x) && 0 <= (y) && (x) < (maxX) && (y) < (maxY))
+ 
+typedef long long LL;
+typedef unsigned long long ULL;
+typedef vector<int> VI;
+typedef vector<VI > VVI;
+typedef vector<string> VS;
+typedef vector<LL> VLL;
+typedef pair<int,int> PII;
+ 
+const int INF = 0x3f3f3f3f;
+const LL INFL = 0x3f3f3f3f3f3f3f3fLL;
+const double EPS = 1e-9;
+ 
+const int DX[]={1,0,-1,0},DY[]={0,-1,0,1};
+
+{% if mod %}
+const LL MOD = {{ mod }};
+{% endif %}
+{% if yes_str %}
+const string YES = "{{ yes_str }}";
+{% endif %}
+{% if no_str %}
+const string NO = "{{ no_str }}";
+{% endif %}
+
+{% if prediction_success %}
+void solve({{ formal_arguments }}){
+
+}
+{% endif %}
+
+int main(){
+    {% if prediction_success %}
+    {{input_part}}
+    solve({{ actual_arguments }});
+    {% else %}
+    // Failed to predict input format
+    {% endif %}
+    return 0;
+}
+....
+
+
+== 7. atcoder-toolsの設定ファイルを作成
+
+~/.atcodertools.toml に設定ファイルを保存することで任意のオプションを保存することができます。 +
+参考例の設定ファイルを下記に記載します。 +
+詳しくは、 https://github.com/kyuridenamida/atcoder-tools[atcoder-toolsのGitHub] を確認してください。 +
+
+....
+$ vi ~/.atcodertools.toml
+
+下記の行を追記して保存
+[codestyle]
+indent_type='space'
+indent_width=4
+template_file='~/works/CompetitiveProgramming/template/atcoder.template'
+workspace_dir='~/works/CompetitiveProgramming/AtCoder'
+lang='cpp'
+
+[etc]
+save_no_session_cache=false
+....
+
+
+== 8. VSCodeの設定
+
+作成した `~/works/CompetitiveProgramming` ディレクトリに移動し、VSCodeを起動します。 +
+
+....
+$ cd ~/works/CompetitiveProgramming
+$ code .
+....
+
+起動後、左側のバーの四角が重なっているような一番下にあるアイコンをクリックし、拡張機能の検索タブを表示します。 +
+`Marketplaceで拡張機能を検索する` と表示されているテキストエリアに `c++` と入力し、検索結果に表示された `C/C++` と `C++ Intellisense` のインストールボタンをクリックしてインストールします。 +
+
+`Ctrl + Shift + ^` キーを押し、ターミナルを表示します。 +
+ターミナル上で `atcoder-tools -v` と入力し、usageが表示されることを確認します。 +
+
+
+== 9. 使用方法
+
+=== 9.1 起動方法
+
+作成した `~/works/CompetitiveProgramming` ディレクトリに移動し、VSCodeを起動します。 +
+
+....
+$ cd ~/works/CompetitiveProgramming
+$ code .
+....
+
+=== 9.2 ファイルの作成
+
+VSCode上のターミナルで `atcoder-tools gen` を使用し、ディレクトリとファイルの作成を行います。 +
+下記は `ABC084` のコンテストのディレクトリとファイルを作成する例になります。 +
+
+....
+$ atcoder-tools gen abc084
+....
+
+実行すると、 `~/works/CompetitiveProgramming/AtCoder/abc084` ディレクトリ以下に `A〜D` のディレクトリが作成され、 `main.cpp` と 入出力のファイルが保存されます。 +
+
+=== 9.3 問題を解く
+
+左側のディレクトリから解きたい問題の `main.cpp` をクリックし、VSCode上で問題を解きます。 +
+
+=== 9.4 コンパイル
+
+VSCodeのターミナル上で解いた問題のディレクトリに移動し、5でエイリアスに設定した `g++14` コマンドでコンパイルを実行します。 +
+
+....
+$ cd AtCoder/abc084/D
+$ g++14 main.cpp
+....
+
+=== 9.5 サンプルのテスト
+
+VSCode上のターミナルで `atcoder-tools test` を使用し、テストを実行します。 +
+
+....
+$ atcoder-tools test
+....
+
+
+=== 9.6 提出
+
+VSCode上のターミナルで `atcoder-tools submit` を使用し、提出を行います。 +
+既に提出済みの場合は `-u` オプションをつけることで再提出することが可能です。 +
+
+....
+$ atcoder-tools submit
+....
