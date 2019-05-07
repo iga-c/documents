@@ -1,0 +1,57 @@
+= ruby環境構築手順書
+
+== 1. 必要なパッケージのインストール
+
+`rbenv` を使用する際に必要なパッケージをインストールします。 +
+
+....
+$ sudo apt-get install autoconf bison build-essential libssl-dev libyaml-dev libreadline-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm-dev git
+....
+
+== 2. rbenvとruby-buildを取得と設定
+
+GitHubからrbenvとruby-buildをcloneします。 +
+
+....
+$ git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+$ git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
+....
+
+`~/.bashrc` にrbenvのパスを追加します。 +
+
+....
+$ echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
+....
+
+`rbenv init` を実行し、出力結果の手順を実行します。 +
+
+....
+$ ~/.rbenv/bin/rbenv init
+....
+
+`~/.bashrc` の再読込を行います。 +
+
+....
+$ source ~/.bashrc
+....
+
+== 3. rubyのインストール
+
+インストール可能なバージョン一覧を下記のコマンドで確認し、最新版のrubyをインストールします。 +
+
+....
+$ rbenv install -l    # インストール可能なバージョン一覧の確認
+$ rbenv install X.Y.Z # X.Y.Zのバージョンのrubyをインストールする
+$ rbenv global X.Y.Z  # 使用するrubyのバージョンを指定
+....
+
+== 4. bundlerのインストール
+
+gemを使用しbundlerのインストールを行います。
+
+....
+$ gem install bundler
+....
+
+== 参考サイト
+- https://qiita.com/tatsurou313/items/2a67075ae2416922bff0[Ubuntuでのrbenv,ruby-buildの使い方と事前準備に必要なaptパッケージ]

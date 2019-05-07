@@ -97,3 +97,10 @@ $ ls -alh ~/
 ....
 
 `ls` コマンドの結果に `.mozilla` ディレクトリが存在することを確認します。 +
+
+== 4. 開発環境のインストール
+
+- link:競技プログラミング環境構築手順書.adoc[競技プログラミング環境構築]
+- https://qiita.com/seibe/items/36cef7df85fe2cefa3ea[nodejs インストール手順] +
+-> `sudo apt autoremove` も追加で実行する
+- link:ruby環境構築手順書.adoc[ruby環境構築]
