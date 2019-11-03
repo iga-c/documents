@@ -20,7 +20,7 @@ $ git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
 `~/.bashrc` にrbenvのパスを追加します。 +
 
 ....
-$ echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
+$ echo 'export PATH="$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
 ....
 
 `rbenv init` を実行し、出力結果の手順を実行します。 +
